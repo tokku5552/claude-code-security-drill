@@ -1,0 +1,229 @@
+/* ===== RESULT ===== */
+.result-screen {
+  display: none;
+}
+
+.result-screen.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+.result-hero {
+  text-align: center;
+  padding: 60px 0 40px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.result-hero .label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+
+.result-hero .score {
+  font-family: var(--sans);
+  font-size: clamp(80px, 16vw, 160px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 8px;
+}
+
+.result-hero .score .out-of {
+  font-size: 0.4em;
+  color: var(--ink-faint);
+  font-weight: 400;
+}
+
+.result-hero .rank {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+}
+
+.result-hero .rank-name {
+  font-family: var(--sans);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-top: 10px;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+
+.result-msg {
+  margin: 40px 0;
+  padding: 24px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--ink-dim);
+}
+
+.result-msg strong {
+  color: var(--ink);
+}
+
+.breakdown {
+  margin-top: 40px;
+}
+
+.breakdown-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.breakdown-list {
+  border: 1px solid var(--line);
+}
+
+.breakdown-item {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.breakdown-item:last-child {
+  border-bottom: none;
+}
+
+.breakdown-item .num {
+  font-family: var(--mono);
+  color: var(--ink-faint);
+  font-size: 11px;
+}
+
+.breakdown-item .topic {
+  color: var(--ink);
+}
+
+.breakdown-item .mark {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.breakdown-item .mark.ok {
+  color: var(--safe);
+}
+
+.breakdown-item .mark.ng {
+  color: var(--danger);
+}
+
+.restart-btn {
+  margin-top: 40px;
+  width: 100%;
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 22px;
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.restart-btn:hover {
+  background: var(--ink);
+}
+
+/* ===== SHARE SECTION ===== */
+.share-section {
+  margin-top: 40px;
+  padding: 24px;
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.share-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.share-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--ink);
+  color: var(--bg);
+  border: none;
+  padding: 14px 24px;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.share-btn:hover {
+  background: var(--accent);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+.share-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.share-btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--line);
+}
+
+.share-btn-secondary:hover {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 4px 4px 0 var(--line);
+}
+
+.copied-toast {
+  margin-top: 10px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--safe);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.copied-toast.show {
+  opacity: 1;
+}

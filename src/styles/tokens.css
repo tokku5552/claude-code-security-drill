@@ -1,0 +1,22 @@
+:root {
+  --bg: #0a0a0a;
+  --bg-elev: #131313;
+  --ink: #ededed;
+  --ink-dim: #888;
+  --ink-faint: #4a4a4a;
+  --accent: #ff4d3d;
+  --accent-glow: rgba(255, 77, 61, 0.4);
+  --safe: #4ade80;
+  --warn: #fbbf24;
+  --danger: #ff4d3d;
+  --grid: rgba(255, 255, 255, 0.04);
+  --line: rgba(255, 255, 255, 0.08);
+  --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --sans: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}

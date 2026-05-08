@@ -1,0 +1,124 @@
+#!/usr/bin/env python3
+"""
+Generate og/[en/]0.png ~ 10.png (1200x630, dark theme, score + rank).
+
+Usage:
+    python3 scripts/generate_og_images.py [--lang ja|en]
+"""
+import argparse
+import os
+from PIL import Image, ImageDraw
+
+from _common import (
+    OG_STRINGS,
+    get_rank,
+    load_font,
+    og_message,
+    og_output_dir,
+)
+
+# Color palette (mirrors the CSS tokens)
+BG = (10, 10, 10)
+INK = (237, 237, 237)
+INK_DIM = (136, 136, 136)
+INK_FAINT = (74, 74, 74)
+ACCENT = (255, 77, 61)
+LINE = (35, 35, 35)
+
+
+def make_og(score, lang, output_path):
+    W, H = 1200, 630
+    img = Image.new("RGB", (W, H), BG)
+    draw = ImageDraw.Draw(img)
+
+    # Subtle grid lines
+    for x in range(0, W, 60):
+        draw.line([(x, 0), (x, H)], fill=(20, 20, 20), width=1)
+    for y in range(0, H, 60):
+        draw.line([(0, y), (W, y)], fill=(20, 20, 20), width=1)
+
+    # Top left badge
+    badge_font = load_font("mono_bold", 18, lang)
+    draw.text((60, 50), "● SECURITY.DRILL // 001", fill=ACCENT, font=badge_font)
+
+    # Top right meta
+    meta_font = load_font("mono_reg", 16, lang)
+    meta_text = "claude code / 2026"
+    bbox = draw.textbbox((0, 0), meta_text, font=meta_font)
+    draw.text((W - 60 - (bbox[2] - bbox[0]), 52), meta_text, fill=INK_DIM, font=meta_font)
+
+    # Horizontal divider
+    draw.line([(60, 95), (W - 60, 95)], fill=LINE, width=1)
+
+    # Main title
+    title_font = load_font("sans_bold", 42, lang)
+    draw.text((60, 140), OG_STRINGS[lang]["title"], fill=INK, font=title_font)
+
+    # Massive score
+    score_font = load_font("sans_bold", 240, lang)
+    score_text = f"{score}"
+    score_bbox = draw.textbbox((0, 0), score_text, font=score_font)
+    score_w = score_bbox[2] - score_bbox[0]
+    score_h = score_bbox[3] - score_bbox[1]
+    score_x = 60
+    score_y = 220
+    score_color = INK if score >= 6 else ACCENT
+    draw.text((score_x, score_y), score_text, fill=score_color, font=score_font)
+
+    # /10 next to score
+    out_of_font = load_font("sans_bold", 80, lang)
+    out_of_text = "/10"
+    out_of_x = score_x + score_w + 20
+    out_of_bbox = draw.textbbox((0, 0), out_of_text, font=out_of_font)
+    out_of_h = out_of_bbox[3] - out_of_bbox[1]
+    out_of_y = score_y + score_h - out_of_h - 10
+    draw.text((out_of_x, out_of_y), out_of_text, fill=INK_FAINT, font=out_of_font)
+
+    # Right side: rank info
+    right_x = 700
+    rank_label_font = load_font("mono_reg", 16, lang)
+    draw.text((right_x, 240), "▸ RANK", fill=ACCENT, font=rank_label_font)
+
+    rank_name, rank_color = get_rank(score, lang)
+    rank_font = load_font("mono_bold", 36, lang)
+    draw.text((right_x, 270), rank_name, fill=rank_color, font=rank_font)
+
+    # Vertical separator
+    draw.line([(right_x - 30, 260), (right_x - 30, 440)], fill=LINE, width=1)
+
+    # Message
+    msg_font = load_font("sans_reg", 22, lang)
+    draw.text((right_x, 360), og_message(score, lang), fill=INK_DIM, font=msg_font)
+
+    # Bottom CTA / footer
+    draw.line([(60, 540), (W - 60, 540)], fill=LINE, width=1)
+
+    cta_font = load_font("sans_bold", 24, lang)
+    draw.text((60, 562), OG_STRINGS[lang]["cta"], fill=INK, font=cta_font)
+
+    site_font = load_font("mono_reg", 16, lang)
+    site_text = "Stay paranoid. Stay productive."
+    bbox = draw.textbbox((0, 0), site_text, font=site_font)
+    draw.text((W - 60 - (bbox[2] - bbox[0]), 568), site_text, fill=INK_FAINT, font=site_font)
+
+    img.save(output_path, "PNG", optimize=True)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--lang", choices=["ja", "en"], default="ja")
+    args = parser.parse_args()
+
+    out_dir = og_output_dir(args.lang)
+    os.makedirs(out_dir, exist_ok=True)
+
+    for score in range(11):
+        path = os.path.join(out_dir, f"{score}.png")
+        make_og(score, args.lang, path)
+        print(f"Generated: {path}")
+
+    print(f"\nDone. 11 OG images created in {out_dir} (lang={args.lang})")
+
+
+if __name__ == "__main__":
+    main()

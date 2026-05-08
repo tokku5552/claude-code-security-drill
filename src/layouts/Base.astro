@@ -1,0 +1,58 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title = 'Claude Code セキュリティ・クイズ / SECURITY DRILL #001',
+  description = 'Claude Codeを使うすべての人のためのセキュリティ・クイズ全10問。所要時間 約7分。あなたのスコアは？',
+  ogImage = 'og/cover.png',
+} = Astro.props;
+
+const baseHref = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : import.meta.env.BASE_URL + '/';
+const baseUrl = Astro.site
+  ? new URL(baseHref, Astro.site)
+  : new URL(baseHref, Astro.url);
+const ogImageUrl = new URL(ogImage, baseUrl).toString();
+const canonicalUrl = baseUrl.toString();
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Claude Code セキュリティ・ドリル" />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Claude Code Security Drill" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Claude Code セキュリティ・ドリル" />
+    <meta name="twitter:description" content="あなたのClaude Codeセキュリティ感覚を10問でチェック" />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>
