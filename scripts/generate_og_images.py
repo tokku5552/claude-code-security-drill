@@ -17,13 +17,15 @@ from _common import (
     og_output_dir,
 )
 
-# Color palette (mirrors the CSS tokens)
-BG = (10, 10, 10)
-INK = (237, 237, 237)
-INK_DIM = (136, 136, 136)
-INK_FAINT = (74, 74, 74)
-ACCENT = (255, 77, 61)
-LINE = (35, 35, 35)
+# Color palette (mirrors the warm-dark CSS tokens, intentionally shifted off
+# Anthropic's exact spec)
+BG = (24, 23, 21)
+GRID = (32, 31, 29)
+INK = (250, 249, 245)
+INK_DIM = (176, 174, 165)
+INK_FAINT = (111, 109, 101)
+ACCENT = (198, 99, 68)       # warm brick (Claude-Orange-inspired but distinct)
+LINE = (44, 43, 40)
 
 
 def make_og(score, lang, output_path):
@@ -33,13 +35,9 @@ def make_og(score, lang, output_path):
 
     # Subtle grid lines
     for x in range(0, W, 60):
-        draw.line([(x, 0), (x, H)], fill=(20, 20, 20), width=1)
+        draw.line([(x, 0), (x, H)], fill=GRID, width=1)
     for y in range(0, H, 60):
-        draw.line([(0, y), (W, y)], fill=(20, 20, 20), width=1)
-
-    # Top left badge
-    badge_font = load_font("mono_bold", 18, lang)
-    draw.text((60, 50), "● SECURITY.DRILL // 001", fill=ACCENT, font=badge_font)
+        draw.line([(0, y), (W, y)], fill=GRID, width=1)
 
     # Top right meta
     meta_font = load_font("mono_reg", 16, lang)
@@ -62,8 +60,8 @@ def make_og(score, lang, output_path):
     score_h = score_bbox[3] - score_bbox[1]
     score_x = 60
     score_y = 220
-    score_color = INK if score >= 6 else ACCENT
-    draw.text((score_x, score_y), score_text, fill=score_color, font=score_font)
+    # Score number is always INK; only the rank itself carries the status color.
+    draw.text((score_x, score_y), score_text, fill=INK, font=score_font)
 
     # /10 next to score
     out_of_font = load_font("sans_bold", 80, lang)

@@ -11,12 +11,13 @@ from PIL import Image, ImageDraw
 
 from _common import COVER_STRINGS, load_font, og_output_dir
 
-BG = (10, 10, 10)
-INK = (237, 237, 237)
-INK_DIM = (136, 136, 136)
-INK_FAINT = (74, 74, 74)
-ACCENT = (255, 77, 61)
-LINE = (35, 35, 35)
+BG = (24, 23, 21)
+GRID = (32, 31, 29)
+INK = (250, 249, 245)
+INK_DIM = (176, 174, 165)
+INK_FAINT = (111, 109, 101)
+ACCENT = (198, 99, 68)
+LINE = (44, 43, 40)
 
 COLOR_BY_ROLE = {"INK": INK, "ACCENT": ACCENT, "INK_DIM": INK_DIM, "INK_FAINT": INK_FAINT}
 
@@ -28,13 +29,9 @@ def make_cover(lang, output_path):
 
     # Subtle grid
     for x in range(0, W, 60):
-        draw.line([(x, 0), (x, H)], fill=(20, 20, 20), width=1)
+        draw.line([(x, 0), (x, H)], fill=GRID, width=1)
     for y in range(0, H, 60):
-        draw.line([(0, y), (W, y)], fill=(20, 20, 20), width=1)
-
-    # Top badge
-    badge_font = load_font("mono_bold", 18, lang)
-    draw.text((60, 50), "● SECURITY.DRILL // 001", fill=ACCENT, font=badge_font)
+        draw.line([(0, y), (W, y)], fill=GRID, width=1)
 
     meta_font = load_font("mono_reg", 16, lang)
     meta_text = "claude code / 2026"

@@ -4,8 +4,7 @@ const en: Translations = {
   ui: {
     htmlTitle: 'Claude Code Security Quiz / SECURITY DRILL #001',
 
-    topbarLeft: 'SECURITY.DRILL // 001',
-    topbarRight: '2026 / TOKYO',
+    topbarRight: '2026',
 
     heroMeta: '10 questions',
     heroTitleHtml: 'Useful and <span class="accent">dangerous</span><br>are a hair apart.',
@@ -56,7 +55,8 @@ const en: Translations = {
     copiedToast: '✓ Copied to clipboard',
 
     restartBtn: 'Try again ↻',
-    footerHtml: 'Claude Code Security Drill<br>Knowledge as of 2026. Stay paranoid. Stay productive.',
+    footerHtml:
+      'Claude Code Security Drill · Stay paranoid. Stay productive.<br>An independent project, not affiliated with Anthropic · Built by <a href="https://www.tokku-tech.dev/" target="_blank" rel="noopener noreferrer">tokku</a> · 2026',
 
     ranks: {
       security_sentinel: 'Security Sentinel',

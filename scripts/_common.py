@@ -69,10 +69,12 @@ def share_redirect_path(lang):
 
 
 def get_rank(score, lang="ja"):
-    """Returns (rank_name, rgb_tuple) for a given score."""
-    SAFE = (74, 222, 128)
-    WARN = (251, 191, 36)
-    ACCENT = (255, 77, 61)
+    """Returns (rank_name, rgb_tuple) for a given score.
+    Colors are softened (Anthropic-style warm palette) to match the in-page UI.
+    """
+    SAFE = (122, 171, 135)    # softer green
+    WARN = (201, 146, 63)     # softer amber
+    DANGER = (196, 86, 75)    # warmer brick (replaces neon red)
     if score == 10:
         return ("Security Sentinel", SAFE)
     if score >= 8:
@@ -80,8 +82,8 @@ def get_rank(score, lang="ja"):
     if score >= 6:
         return ("Aware but Vulnerable", WARN)
     if score >= 4:
-        return ("At Risk", ACCENT)
-    return ("High Exposure", ACCENT)
+        return ("At Risk", DANGER)
+    return ("High Exposure", DANGER)
 
 
 # OG card per-score message + brand title + bottom CTA
@@ -89,22 +91,22 @@ OG_STRINGS = {
     "ja": {
         "title": "Claude Codeセキュリティドリル",
         "messages": {
-            10: "完璧。チームに教えてあげて",
-            8: "セキュリティの基本姿勢は身についている",
-            6: "基礎は理解、いくつか盲点あり",
-            4: "リスクが高い、復習推奨",
-            0: "危険水域。今すぐ学び直しを",
+            10: "完璧でした。",
+            8: "基本姿勢は身についています。",
+            6: "基礎は理解。少し盲点があります。",
+            4: "復習をおすすめします。",
+            0: "見直しが必要です。",
         },
         "cta": "あなたも挑戦できる →",
     },
     "en": {
         "title": "Claude Code Security Drill",
         "messages": {
-            10: "Perfect. Share with your team.",
-            8: "Solid security instincts.",
-            6: "Basics down, blind spots remain.",
-            4: "High risk. Review recommended.",
-            0: "Danger zone. Re-learn now.",
+            10: "Perfect. Pass it on.",
+            8: "Solid instincts.",
+            6: "Basics covered, gaps remain.",
+            4: "Worth reviewing.",
+            0: "Worth a careful re-read.",
         },
         "cta": "Try it yourself →",
     },
