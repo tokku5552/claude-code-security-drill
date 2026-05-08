@@ -7,8 +7,7 @@ const en: Translations = {
     topbarRight: '2026',
 
     heroMeta: '10 questions',
-    heroTitleHtml:
-      'Claude Code<br><span class="accent">Security</span> Quiz',
+    heroTitleHtml: 'Claude Code<br><span class="accent">Security</span> Quiz',
     heroLedeHtml:
       'Claude Code reads your files, runs commands, and connects to external services. That <strong>power</strong> is also your <strong>attack surface</strong>.<br><br>This drill is 10 questions to sharpen your sense of what to allow — and what not to. About 7 minutes.',
 

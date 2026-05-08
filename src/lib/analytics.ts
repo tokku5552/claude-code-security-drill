@@ -1,7 +1,4 @@
-type GtagFn = (
-  command: 'event' | 'config' | 'js',
-  ...args: unknown[]
-) => void;
+type GtagFn = (command: 'event' | 'config' | 'js', ...args: unknown[]) => void;
 
 declare global {
   interface Window {
