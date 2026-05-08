@@ -50,31 +50,18 @@ def make_og(score, lang, output_path):
     # Horizontal divider
     draw.line([(60, 95), (W - 60, 95)], fill=LINE, width=1)
 
-    # Brand title + clarifying subtitle so the card reads "this is a quiz"
-    title_font = load_font("sans_bold", 38, lang)
-    draw.text((60, 128), strings["title"], fill=INK, font=title_font)
-    subtitle_font = load_font("sans_reg", 22, lang)
-    draw.text((60, 182), strings["subtitle"], fill=INK_DIM, font=subtitle_font)
+    # Single brand line — clarifies "this is a quiz" without a separate subtitle.
+    title_font = load_font("sans_bold", 36, lang)
+    draw.text((60, 145), strings["title"], fill=INK, font=title_font)
 
-    # Massive score (left)
+    # Massive score on a 0–100 scale (score is 0..10 internally, ×10 for display)
+    # so the number is unambiguous on a Twitter card without a "/10" denominator.
     score_font = load_font("sans_bold", 220, lang)
-    score_text = f"{score}"
+    score_text = f"{score * 10}"
     score_bbox = draw.textbbox((0, 0), score_text, font=score_font)
-    score_w = score_bbox[2] - score_bbox[0]
-    score_h = score_bbox[3] - score_bbox[1]
     score_x = 60
     score_y = 235
-    # Score number is always INK; only the rank itself carries the status color.
     draw.text((score_x, score_y), score_text, fill=INK, font=score_font)
-
-    # /10 next to score
-    out_of_font = load_font("sans_bold", 72, lang)
-    out_of_text = "/10"
-    out_of_x = score_x + score_w + 18
-    out_of_bbox = draw.textbbox((0, 0), out_of_text, font=out_of_font)
-    out_of_h = out_of_bbox[3] - out_of_bbox[1]
-    out_of_y = score_y + score_h - out_of_h - 10
-    draw.text((out_of_x, out_of_y), out_of_text, fill=INK_FAINT, font=out_of_font)
 
     # Score caption — anchors what the big number actually is
     score_label_font = load_font("sans_reg", 22, lang)

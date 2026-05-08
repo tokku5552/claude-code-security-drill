@@ -89,8 +89,7 @@ def get_rank(score, lang="ja"):
 # OG card per-score message + brand title + bottom CTA
 OG_STRINGS = {
     "ja": {
-        "title": "Claude Codeセキュリティドリル",
-        "subtitle": "Claude Code セキュリティ理解度チェック",
+        "title": "Claude Codeセキュリティ理解度チェック",
         "score_label": "セキュリティスコア",
         "rank_label": "RANK",
         "rank_subtitles": {
@@ -111,8 +110,7 @@ OG_STRINGS = {
         "tagline": "Claude Codeでセキュリティ感覚を鍛える",
     },
     "en": {
-        "title": "Claude Code Security Drill",
-        "subtitle": "Claude Code Security Quiz",
+        "title": "Claude Code Security Quiz",
         "score_label": "Security Score",
         "rank_label": "RANK",
         "rank_subtitles": {
