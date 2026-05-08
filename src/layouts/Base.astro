@@ -68,11 +68,11 @@ const enableGa = import.meta.env.PROD && Boolean(GA_MEASUREMENT_ID);
           />
           <script is:inline define:vars={{ gaId: GA_MEASUREMENT_ID }}>
             window.dataLayer = window.dataLayer || [];
-            function gtag(...args) {
-              dataLayer.push(args);
-            }
-            gtag('js', new Date());
-            gtag('config', gaId);
+            window.gtag = function (...args) {
+              window.dataLayer.push(args);
+            };
+            window.gtag('js', new Date());
+            window.gtag('config', gaId);
           </script>
         </>
       )
