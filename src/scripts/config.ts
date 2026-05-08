@@ -8,7 +8,7 @@ export const SITE_URL = `${import.meta.env.SITE ?? ''}${import.meta.env.BASE_URL
 );
 
 export const REPO_URL = 'https://github.com/tokku5552/claude-code-security-drill';
-export const HASHTAGS = 'ClaudeCode,セキュリティ';
+export const HASHTAGS = 'CCSecDrill';
 export const EVENT_TAG = '';
 
 // GA4 Measurement ID. Public by design (it ships in every page's HTML and is
