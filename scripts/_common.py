@@ -90,6 +90,16 @@ def get_rank(score, lang="ja"):
 OG_STRINGS = {
     "ja": {
         "title": "Claude Codeセキュリティドリル",
+        "subtitle": "Claude Code セキュリティ理解度チェック",
+        "score_label": "セキュリティスコア",
+        "rank_label": "RANK",
+        "rank_subtitles": {
+            10: "最高ランク",
+            8: "上位ランク",
+            6: "中位ランク",
+            4: "要注意ランク",
+            0: "要復習ランク",
+        },
         "messages": {
             10: "完璧でした。",
             8: "基本姿勢は身についています。",
@@ -97,10 +107,21 @@ OG_STRINGS = {
             4: "復習をおすすめします。",
             0: "見直しが必要です。",
         },
-        "cta": "あなたも挑戦できる →",
+        "cta": "あなたも挑戦する →",
+        "tagline": "Claude Codeでセキュリティ感覚を鍛える",
     },
     "en": {
         "title": "Claude Code Security Drill",
+        "subtitle": "Claude Code Security Quiz",
+        "score_label": "Security Score",
+        "rank_label": "RANK",
+        "rank_subtitles": {
+            10: "Top tier",
+            8: "Strong",
+            6: "Mixed",
+            4: "At risk",
+            0: "Needs review",
+        },
         "messages": {
             10: "Perfect. Pass it on.",
             8: "Solid instincts.",
@@ -108,17 +129,25 @@ OG_STRINGS = {
             4: "Worth reviewing.",
             0: "Worth a careful re-read.",
         },
-        "cta": "Try it yourself →",
+        "cta": "Take the drill →",
+        "tagline": "Sharpen your security instincts",
     },
 }
 
 
-def og_message(score, lang):
-    msgs = OG_STRINGS[lang]["messages"]
+def _og_threshold_pick(score, table):
     for threshold in (10, 8, 6, 4, 0):
         if score >= threshold:
-            return msgs[threshold]
-    return msgs[0]
+            return table[threshold]
+    return table[0]
+
+
+def og_message(score, lang):
+    return _og_threshold_pick(score, OG_STRINGS[lang]["messages"])
+
+
+def og_rank_subtitle(score, lang):
+    return _og_threshold_pick(score, OG_STRINGS[lang]["rank_subtitles"])
 
 
 # Cover-image strings. Title is a list of (segment, color_role) pairs per line.
