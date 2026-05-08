@@ -1,18 +1,36 @@
 :root {
-  --bg: #0a0a0a;
-  --bg-elev: #131313;
-  --ink: #ededed;
-  --ink-dim: #888;
-  --ink-faint: #4a4a4a;
-  --accent: #ff4d3d;
-  --accent-glow: rgba(255, 77, 61, 0.4);
-  --safe: #4ade80;
-  --warn: #fbbf24;
-  --danger: #ff4d3d;
-  --grid: rgba(255, 255, 255, 0.04);
-  --line: rgba(255, 255, 255, 0.08);
+  /* Surfaces (warm dark, intentionally a touch off Anthropic's exact spec) */
+  --bg: #181715;
+  --bg-elev: #232220;
+
+  /* Text */
+  --ink: #faf9f5;
+  --ink-dim: #b0aea5;
+  --ink-faint: #6f6d65;
+
+  /* Accent — warm brick. Inspired by Claude Orange but shifted toward red
+     so it doesn't pixel-match the official brand color. */
+  --accent: #c66344;
+  --accent-soft: rgba(198, 99, 68, 0.1);
+  --accent-line: rgba(198, 99, 68, 0.4);
+
+  /* Status colors — softened, not screaming */
+  --safe: #7aab87;
+  --warn: #c9923f;
+  --danger: #c4564b;
+
+  /* Lines / dividers on warm dark */
+  --line: rgba(250, 249, 245, 0.1);
+  --line-soft: rgba(250, 249, 245, 0.06);
+
+  /* Type stacks. Latin first, then JP fallback so each script gets the
+     family that draws it best. */
+  --serif:
+    'Source Serif Pro', 'Noto Serif JP', Georgia, 'Times New Roman', serif;
+  --sans:
+    'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
-  --sans: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 }
 
 * {

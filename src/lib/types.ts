@@ -26,7 +26,6 @@ export type RankKey =
 
 export interface UiStrings {
   htmlTitle: string;
-  topbarLeft: string;
   topbarRight: string;
 
   heroMeta: string;

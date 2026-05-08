@@ -15,11 +15,11 @@
 }
 
 .hero h1 {
-  font-family: var(--sans);
-  font-weight: 900;
-  font-size: clamp(36px, 6vw, 64px);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: clamp(36px, 6vw, 60px);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
   margin-bottom: 28px;
 }
 
@@ -72,29 +72,28 @@
   margin-top: 40px;
   background: var(--accent);
   color: var(--bg);
-  border: none;
-  padding: 20px 40px;
-  font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  border: 1px solid var(--accent);
+  padding: 18px 36px;
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0;
   cursor: pointer;
-  transition: all 0.2s;
-  position: relative;
-  overflow: hidden;
+  transition:
+    background 0.18s,
+    color 0.18s,
+    border-color 0.18s;
 }
 
 .start-btn:hover {
-  background: var(--ink);
-  transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0 var(--accent);
+  background: transparent;
+  color: var(--accent);
 }
 
 .start-btn .arrow {
-  margin-left: 12px;
+  margin-left: 10px;
   display: inline-block;
-  transition: transform 0.2s;
+  transition: transform 0.18s;
 }
 
 .start-btn:hover .arrow {
@@ -103,7 +102,7 @@
 
 /* ===== TOPICS PREVIEW ===== */
 .topics {
-  margin-top: 48px;
+  margin-top: 56px;
 }
 
 .topics-title {
@@ -125,7 +124,12 @@
 
 .topic-card {
   background: var(--bg);
-  padding: 20px;
+  padding: 22px 22px 24px;
+  transition: background 0.18s;
+}
+
+.topic-card:hover {
+  background: var(--bg-elev);
 }
 
 .topic-card .num {
@@ -133,14 +137,16 @@
   font-size: 11px;
   color: var(--accent);
   margin-bottom: 8px;
+  letter-spacing: 0.1em;
 }
 
 .topic-card .name {
-  font-family: var(--sans);
-  font-size: 17px;
-  font-weight: 700;
-  margin-bottom: 6px;
-  letter-spacing: -0.01em;
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.005em;
+  line-height: 1.35;
 }
 
 .topic-card .desc {

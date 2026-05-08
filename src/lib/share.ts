@@ -6,7 +6,11 @@ export function buildShareUrl(score: number, lang: Lang): string {
   return `${SITE_URL}/share${langSeg}/${score}.html`;
 }
 
-export function buildXIntentUrl(score: number, lang: Lang, tweetText: string): string {
+export function buildXIntentUrl(
+  score: number,
+  lang: Lang,
+  tweetText: string,
+): string {
   const xUrl = new URL('https://twitter.com/intent/tweet');
   xUrl.searchParams.set('text', tweetText);
   xUrl.searchParams.set('url', buildShareUrl(score, lang));

@@ -191,7 +191,9 @@ function revealAnswer(log: AnswerLog): void {
     }
   });
 
-  refs.verdict.textContent = log.correct ? t.ui.verdictCorrect : t.ui.verdictWrong;
+  refs.verdict.textContent = log.correct
+    ? t.ui.verdictCorrect
+    : t.ui.verdictWrong;
   refs.verdict.className = 'verdict ' + (log.correct ? 'correct' : 'wrong');
   refs.verdictMeta.textContent = `${state.score} / ${state.currentQ + 1}`;
   refs.explanationTitle.textContent = q.title;
@@ -218,7 +220,8 @@ function revealAnswer(log: AnswerLog): void {
 
   refs.explanation.classList.add('show');
 
-  refs.nextBtn.textContent = state.currentQ === TOTAL - 1 ? t.ui.nextLast : t.ui.nextNormal;
+  refs.nextBtn.textContent =
+    state.currentQ === TOTAL - 1 ? t.ui.nextLast : t.ui.nextNormal;
   refs.nextBtn.classList.add('show');
 }
 
@@ -277,7 +280,11 @@ function renderResult(): void {
   });
 
   const lang = getLang();
-  refs.shareX.href = buildXIntentUrl(state.score, lang, t.ui.shareTweetText(state.score, rank));
+  refs.shareX.href = buildXIntentUrl(
+    state.score,
+    lang,
+    t.ui.shareTweetText(state.score, rank),
+  );
 }
 
 function restart(): void {

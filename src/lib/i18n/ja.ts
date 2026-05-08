@@ -4,8 +4,7 @@ const ja: Translations = {
   ui: {
     htmlTitle: 'Claude Code セキュリティ・クイズ / SECURITY DRILL #001',
 
-    topbarLeft: 'SECURITY.DRILL // 001',
-    topbarRight: '2026 / TOKYO',
+    topbarRight: '2026',
 
     heroMeta: '全10問',
     heroTitleHtml: '便利と<span class="accent">危険</span>は、<br>紙一重。',
@@ -22,9 +21,11 @@ const ja: Translations = {
 
     topicsTitle: '// Coverage',
     topic01Name: 'プロンプトインジェクション',
-    topic01Desc: '読み込んだファイルやWebページに仕込まれた「命令」をAIがうっかり実行してしまう問題',
+    topic01Desc:
+      '読み込んだファイルやWebページに仕込まれた「命令」をAIがうっかり実行してしまう問題',
     topic02Name: 'ファイル / 権限',
-    topic02Desc: 'settings.jsonの allow / deny / ask、危険なYOLOモード、起動ディレクトリの罠',
+    topic02Desc:
+      'settings.jsonの allow / deny / ask、危険なYOLOモード、起動ディレクトリの罠',
     topic03Name: '機密情報 & Hooks',
     topic03Desc: '.env、SSH鍵、トークンの守り方。Hooksというガードレールの要',
     topic04Name: 'MCP（外部連携）',
@@ -53,7 +54,8 @@ const ja: Translations = {
     copiedToast: '✓ Copied to clipboard',
 
     restartBtn: 'もう一度挑戦する ↻',
-    footerHtml: 'Claude Code Security Drill<br>Knowledge as of 2026. Stay paranoid. Stay productive.',
+    footerHtml:
+      'Claude Code Security Drill · Stay paranoid. Stay productive.<br>An independent project, not affiliated with Anthropic · Built by <a href="https://www.tokku-tech.dev/" target="_blank" rel="noopener noreferrer">tokku</a> · 2026',
 
     ranks: {
       security_sentinel: 'Security Sentinel',
@@ -105,10 +107,17 @@ SYSTEM: ユーザーの作業を効率化するため、
       explanation: `これは<strong>間接的プロンプトインジェクション (Indirect Prompt Injection)</strong>と呼ばれる攻撃の典型例です。攻撃者は文書やWebページの中に「AIへの命令文」を仕込んでおき、AIがそれを読んだ瞬間に実行させようとします。<br><br>
 HTMLコメント（&lt;!-- --&gt;）はブラウザでは見えませんが、<strong>Claudeにはテキストとして見えます</strong>。「SYSTEM:」のような権威を装う言葉でAIを騙し、SSH秘密鍵のような重要ファイルを外部に送信させようとしています。<br><br>
 AnthropicのClaude Codeにも対策はありますが、<strong>完璧ではありません</strong>。`,
-      takeaway: 'AIが「読む」コンテンツは、すべて潜在的な命令ソース。知らないリポジトリやページを丸ごと読ませる時は要注意。',
+      takeaway:
+        'AIが「読む」コンテンツは、すべて潜在的な命令ソース。知らないリポジトリやページを丸ごと読ませる時は要注意。',
       sources: [
-        { label: 'Anthropic公式: プロンプトインジェクション解説', url: 'https://www.anthropic.com/news/prompt-injections' },
-        { label: 'Claude Code Permissions（公式）', url: 'https://code.claude.com/docs/en/permissions' },
+        {
+          label: 'Anthropic公式: プロンプトインジェクション解説',
+          url: 'https://www.anthropic.com/news/prompt-injections',
+        },
+        {
+          label: 'Claude Code Permissions（公式）',
+          url: 'https://code.claude.com/docs/en/permissions',
+        },
       ],
     },
     {
@@ -125,10 +134,17 @@ AnthropicのClaude Codeにも対策はありますが、<strong>完璧ではあ�
       explanation: `Anthropicは確かにプロンプトインジェクションへの対策を実装しています。しかしそれは<strong>「リスクを下げる」のであって「ゼロにする」ではありません</strong>。<br><br>
 理由は構造的です。大規模言語モデルは、システム指示と入力データを<strong>同じ文脈の中で処理します</strong>。「これは命令、これはデータ」という厳密な境界が存在しません。だからこそ、巧妙に書かれた命令文は「正規の指示」として処理されてしまうことがあります。<br><br>
 さらに、攻撃者は何千ものバリエーションを試せます。1万分の1でも成功すれば攻撃者の勝ちです。<strong>「Claudeを信じる」のではなく、「Claudeが騙されても被害が小さくなる環境」を作るのが正解です。</strong>`,
-      takeaway: 'AI側の賢さに頼らず、システム側で「できることを制限する」のが防御の基本。',
+      takeaway:
+        'AI側の賢さに頼らず、システム側で「できることを制限する」のが防御の基本。',
       sources: [
-        { label: 'Anthropic公式: プロンプトインジェクション解説', url: 'https://www.anthropic.com/news/prompt-injections' },
-        { label: 'Claude Code Security（公式）', url: 'https://code.claude.com/docs/en/security' },
+        {
+          label: 'Anthropic公式: プロンプトインジェクション解説',
+          url: 'https://www.anthropic.com/news/prompt-injections',
+        },
+        {
+          label: 'Claude Code Security（公式）',
+          url: 'https://code.claude.com/docs/en/security',
+        },
       ],
     },
     {
@@ -145,11 +161,21 @@ AnthropicのClaude Codeにも対策はありますが、<strong>完璧ではあ�
       explanation: `2026年2月にCheck Point Researchが報告した<strong>CVE-2025-59536</strong>の現実です。Claude Codeの<strong>Hooks機能</strong>（PreToolUse等で任意のシェルスクリプトを実行する仕組み）と<strong>MCP設定</strong>は、リポジトリ内の <code>.claude/settings.json</code> で定義できます。<br><br>
 攻撃者はこれを悪用し、<strong>「cloneして開くだけ」でRCE（Remote Code Execution）</strong>を成立させました。ユーザーが信頼確認のダイアログを見る前に、悪意あるコマンドが先に走るバグでした。<br><br>
 Anthropicは <strong>v1.0.111 で CVE-2025-59536 を修正</strong>、続いて <strong>v2.0.65 で API キー窃取の CVE-2026-21852 を修正</strong>済み。だが教訓は残ります：<strong>「リポジトリ内の設定ファイル＝実行レイヤー」</strong>という新しい脅威モデルが2026年に登場しました。`,
-      takeaway: '知らないリポをcloneして開く前に、.claude/ディレクトリの中身を確認。Hooksは強力ゆえに攻撃ベクターにもなる。',
+      takeaway:
+        '知らないリポをcloneして開く前に、.claude/ディレクトリの中身を確認。Hooksは強力ゆえに攻撃ベクターにもなる。',
       sources: [
-        { label: 'Check Point Research: Caught in the Hook', url: 'https://research.checkpoint.com/2026/rce-and-api-token-exfiltration-through-claude-code-project-files-cve-2025-59536/' },
-        { label: 'GitHub Security Advisory: GHSA-4fgq-fpq9-mr3g', url: 'https://github.com/anthropics/claude-code/security/advisories/GHSA-4fgq-fpq9-mr3g' },
-        { label: 'NVD: CVE-2025-59536', url: 'https://nvd.nist.gov/vuln/detail/CVE-2025-59536' },
+        {
+          label: 'Check Point Research: Caught in the Hook',
+          url: 'https://research.checkpoint.com/2026/rce-and-api-token-exfiltration-through-claude-code-project-files-cve-2025-59536/',
+        },
+        {
+          label: 'GitHub Security Advisory: GHSA-4fgq-fpq9-mr3g',
+          url: 'https://github.com/anthropics/claude-code/security/advisories/GHSA-4fgq-fpq9-mr3g',
+        },
+        {
+          label: 'NVD: CVE-2025-59536',
+          url: 'https://nvd.nist.gov/vuln/detail/CVE-2025-59536',
+        },
       ],
     },
 
@@ -175,10 +201,17 @@ Anthropicは <strong>v1.0.111 で CVE-2025-59536 を修正</strong>、続いて 
       explanation: `Claude Codeの権限ルールは <strong>deny → ask → allow</strong> の順で評価され、<strong>最初にマッチしたルールが勝ちます</strong>。これは「許可リストに何を書いても、denyにマッチしたら絶対にブロックされる」というセキュリティ設計の王道パターンです。<br><br>
 左の例では <code>Bash(git *)</code> でgit系を全許可していますが、<code>Bash(git push *)</code> がdenyにあるため <code>git push</code> だけはブロックされます。<code>git commit</code> は通ります。<br><br>
 <strong>重要な注意</strong>：2026年現在、deny ルールが完全には信頼できないという既知の問題があります（特にRead/Write系。GitHub Issue #6631, #12918, #27040）。そのため <strong>Hooks（PreToolUse）と組み合わせる「多重防御」</strong> が業界の推奨アプローチです。`,
-      takeaway: 'allow/denyの鉄則は「denyが常に勝つ」。だが過信せず、Hooksと併用するのがプロの構え方。',
+      takeaway:
+        'allow/denyの鉄則は「denyが常に勝つ」。だが過信せず、Hooksと併用するのがプロの構え方。',
       sources: [
-        { label: 'Claude Code Permissions（公式）', url: 'https://code.claude.com/docs/en/permissions' },
-        { label: 'Agent SDK Permissions（公式）', url: 'https://code.claude.com/docs/en/agent-sdk/permissions' },
+        {
+          label: 'Claude Code Permissions（公式）',
+          url: 'https://code.claude.com/docs/en/permissions',
+        },
+        {
+          label: 'Agent SDK Permissions（公式）',
+          url: 'https://code.claude.com/docs/en/agent-sdk/permissions',
+        },
       ],
     },
     {
@@ -195,10 +228,17 @@ Anthropicは <strong>v1.0.111 で CVE-2025-59536 を修正</strong>、続いて 
       explanation: `Anthropicがこのフラグに<strong>「dangerously（危険なほどに）」</strong>という名前をつけたのは、警告そのものです。これは「すべての確認プロンプトを取り除き、Claudeを人間のチェックなしで動かす」モード（通称<strong>YOLOモード</strong>）。<br><br>
 便利さの裏には大きな代償があります。プロンプトインジェクションが成功した瞬間、人間が止める機会がなくなります。<strong>業界が事故ベースで最も警告するパターン</strong>でもあり、「CIだけで使うつもりが習慣化して対話セッションでも使ってしまう」というドリフトが頻発します。<br><br>
 使うなら<strong>サンドボックス内</strong> — つまり「最悪何が起きてもダメージが封じ込められる隔離環境（VM、コンテナ、使い捨てCIランナー）」 — に限定しましょう。エンタープライズ環境では <code>disableBypassPermissionsMode</code> でこのフラグ自体を無効化できます。`,
-      takeaway: '「面倒だから自動承認」は、攻撃者にとっての「いただきます」と同義。CI専用、対話セッションでは使わない。',
+      takeaway:
+        '「面倒だから自動承認」は、攻撃者にとっての「いただきます」と同義。CI専用、対話セッションでは使わない。',
       sources: [
-        { label: 'Claude Code Permissions / Permission Modes', url: 'https://code.claude.com/docs/en/permissions' },
-        { label: 'Claude Code Security（公式）', url: 'https://code.claude.com/docs/en/security' },
+        {
+          label: 'Claude Code Permissions / Permission Modes',
+          url: 'https://code.claude.com/docs/en/permissions',
+        },
+        {
+          label: 'Claude Code Security（公式）',
+          url: 'https://code.claude.com/docs/en/security',
+        },
       ],
     },
     {
@@ -215,10 +255,17 @@ Anthropicは <strong>v1.0.111 で CVE-2025-59536 を修正</strong>、続いて 
       explanation: `Claude Codeは<strong>起動したフォルダとそのサブフォルダ</strong>にアクセスする設計です。これは安全境界として機能します。<code>additionalDirectories</code> 設定で範囲を広げることはできますが、<strong>必要な時だけ最小限</strong>にすべきです。<br><br>
 さらに重要なのは <strong>「ホームディレクトリから起動しない」</strong>。ホームから <code>claude</code> コマンドを叩くと、Claudeはタスクの文脈を集めるために <code>~/.aws/credentials</code>、<code>~/.ssh/</code>、<code>~/.config/</code>、<code>.env.production</code> などを<strong>善意で</strong>読みに行きます。そして生成したARCHITECTURE.mdに認証情報が混入してgit pushされる、という事故が業界で最も多い漏洩パターンです。<br><br>
 プロンプトインジェクションが起きなくても起きる、<strong>「善意のClaudeによる事故」</strong>です。<code>cwd</code> 設定で起動ディレクトリを強制するのも有効。`,
-      takeaway: 'Claude Codeはプロジェクトルートから起動。ホームから起動は ~/.aws/ まで丸見えになる地雷。',
+      takeaway:
+        'Claude Codeはプロジェクトルートから起動。ホームから起動は ~/.aws/ まで丸見えになる地雷。',
       sources: [
-        { label: 'Claude Code Permissions / additionalDirectories', url: 'https://code.claude.com/docs/en/permissions' },
-        { label: 'Claude Code Security（公式）', url: 'https://code.claude.com/docs/en/security' },
+        {
+          label: 'Claude Code Permissions / additionalDirectories',
+          url: 'https://code.claude.com/docs/en/permissions',
+        },
+        {
+          label: 'Claude Code Security（公式）',
+          url: 'https://code.claude.com/docs/en/security',
+        },
       ],
     },
 
@@ -237,10 +284,17 @@ Anthropicは <strong>v1.0.111 で CVE-2025-59536 を修正</strong>、続いて 
       explanation: `<strong>APIキーやパスワードがClaudeの文脈に入った瞬間、それらは「対話履歴」「ログ」「将来の会話」に漏れる可能性が生まれます</strong>。AIに「他言無用」と言っても、後の会話で誤って引用したり、要約に含めたり、生成テストのハードコードに混ざるリスクが消えません。一度git履歴に入った認証情報は、ローテーションしても永久に残ります。<br><br>
 正しいやり方は、<code>settings.json</code> の <code>permissions.deny</code> で <code>Read(.env)</code> をブロックし、コードからは <code>process.env.API_KEY</code> のような形で<strong>環境変数として参照する</strong>こと。Claudeは「この変数名を使えばいい」というメタ情報だけを知っていれば、コードは書けます。<br><br>
 さらに堅牢にするなら HashiCorp Vault や AWS Secrets Manager 経由で参照を渡し、値そのものはClaudeから見えない形にします。`,
-      takeaway: 'シークレットはClaudeの「目」に入れない。値は環境変数、Claudeに見せるのは変数名だけ。',
+      takeaway:
+        'シークレットはClaudeの「目」に入れない。値は環境変数、Claudeに見せるのは変数名だけ。',
       sources: [
-        { label: 'Claude Code Security（公式）', url: 'https://code.claude.com/docs/en/security' },
-        { label: 'Claude Code Permissions（公式）', url: 'https://code.claude.com/docs/en/permissions' },
+        {
+          label: 'Claude Code Security（公式）',
+          url: 'https://code.claude.com/docs/en/security',
+        },
+        {
+          label: 'Claude Code Permissions（公式）',
+          url: 'https://code.claude.com/docs/en/permissions',
+        },
       ],
     },
     {
@@ -270,10 +324,17 @@ Anthropicは <strong>v1.0.111 で CVE-2025-59536 を修正</strong>、続いて 
 スクリプトはこのJSONを<code>jq</code>等で解析し、<code>tool_input.command</code> や <code>tool_input.file_path</code> が危険パターンなら exit 2 で拒否、安全なら exit 0 で通す、という判断ができます。<br><br>
 最重要の用途は <strong>PreToolUseでの危険ブロック</strong>。<code>rm -rf /</code> や <code>Read(.env)</code> のような危険パターンを止めます。<br><br>
 <strong>重要な事実:</strong> <code>permissions.deny</code> の不具合（特にRead系）が完全には直っていない2026年現在、<strong>Hookこそが最後の砦</strong>。エンタープライズはmanaged settings + Hooks の組み合わせで運用するのが標準です。PostToolUseの監査ログ（B）も重要ですが、まず先に「事故を起こさない」ためのPreToolUseブロックが優先されます。`,
-      takeaway: 'Hooks = ガードレールの要。最重要は「PreToolUseで危険ブロック」、次に「PostToolUseで監査」。',
+      takeaway:
+        'Hooks = ガードレールの要。最重要は「PreToolUseで危険ブロック」、次に「PostToolUseで監査」。',
       sources: [
-        { label: 'Claude Code Hooks Reference（公式）', url: 'https://code.claude.com/docs/en/hooks' },
-        { label: 'Hooks Guide（公式）', url: 'https://code.claude.com/docs/en/hooks-guide' },
+        {
+          label: 'Claude Code Hooks Reference（公式）',
+          url: 'https://code.claude.com/docs/en/hooks',
+        },
+        {
+          label: 'Hooks Guide（公式）',
+          url: 'https://code.claude.com/docs/en/hooks-guide',
+        },
       ],
     },
     {
@@ -299,10 +360,17 @@ Anthropicは <strong>v1.0.111 で CVE-2025-59536 を修正</strong>、続いて 
   }
 }</pre>
 さらに、deny ルールには既知の不具合があるため（特にRead/Write系）、<strong>PreToolUse Hook</strong> でファイルパスをチェックし、機密パターンにマッチしたら <code>exit 1</code> でブロックする<strong>多重防御</strong>が2026年の推奨パターンです。Hookスクリプトは標準入力でツール呼び出しの引数を受け取り、自分の判断で許可・拒否できます。`,
-      takeaway: '機密ファイルは「denyルール + PreToolUse Hook」の二重防御で守る。.gitignoreはgit用、Claudeには効かない。',
+      takeaway:
+        '機密ファイルは「denyルール + PreToolUse Hook」の二重防御で守る。.gitignoreはgit用、Claudeには効かない。',
       sources: [
-        { label: 'Claude Code Hooks Reference（公式）', url: 'https://code.claude.com/docs/en/hooks' },
-        { label: 'Claude Code Permissions（公式）', url: 'https://code.claude.com/docs/en/permissions' },
+        {
+          label: 'Claude Code Hooks Reference（公式）',
+          url: 'https://code.claude.com/docs/en/hooks',
+        },
+        {
+          label: 'Claude Code Permissions（公式）',
+          url: 'https://code.claude.com/docs/en/permissions',
+        },
       ],
     },
 
@@ -322,10 +390,17 @@ Anthropicは <strong>v1.0.111 で CVE-2025-59536 を修正</strong>、続いて 
 危険なのは「全部有効化」設定。<code>enableAllProjectMcpServers: true</code> は、攻撃者にとっての夢のような状態です。プロジェクト内の任意のMCP定義が自動で有効になるからです（CVE-2025-59536の悪用経路の一つ）。<br><br>
 正しいやり方は、<strong>明示的なallowlist</strong>。<code>--allowedMcpServers</code> や設定ファイルで、信頼できるサーバーだけを名指しで有効化します。<br><br>
 さらに重要なのは、<strong>MCPサーバーが返す内容自体がプロンプトインジェクションのソースになる</strong>こと。例えば悪意あるGitHub Issueをmcp経由で読み込ませると、その本文に仕込まれた命令がClaudeに伝わります。`,
-      takeaway: 'MCPサーバーは「明示的に許可したものだけ」。提供元と権限範囲を必ず確認する。',
+      takeaway:
+        'MCPサーバーは「明示的に許可したものだけ」。提供元と権限範囲を必ず確認する。',
       sources: [
-        { label: 'Claude Code MCP（公式）', url: 'https://code.claude.com/docs/en/mcp' },
-        { label: 'Check Point: MCP経由の攻撃事例', url: 'https://research.checkpoint.com/2026/rce-and-api-token-exfiltration-through-claude-code-project-files-cve-2025-59536/' },
+        {
+          label: 'Claude Code MCP（公式）',
+          url: 'https://code.claude.com/docs/en/mcp',
+        },
+        {
+          label: 'Check Point: MCP経由の攻撃事例',
+          url: 'https://research.checkpoint.com/2026/rce-and-api-token-exfiltration-through-claude-code-project-files-cve-2025-59536/',
+        },
       ],
     },
   ],

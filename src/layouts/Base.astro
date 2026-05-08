@@ -1,4 +1,6 @@
 ---
+import { GA_MEASUREMENT_ID } from '../lib/config';
+
 interface Props {
   title?: string;
   description?: string;
@@ -19,9 +21,13 @@ const baseUrl = Astro.site
   : new URL(baseHref, Astro.url);
 const ogImageUrl = new URL(ogImage, baseUrl).toString();
 const canonicalUrl = baseUrl.toString();
+
+// GA4 — only embedded in production builds. pnpm dev keeps it off so dev
+// traffic doesn't pollute analytics. The ID itself is public (see config.ts).
+const enableGa = import.meta.env.PROD && Boolean(GA_MEASUREMENT_ID);
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
@@ -39,20 +45,43 @@ const canonicalUrl = baseUrl.toString();
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Claude Code セキュリティ・ドリル" />
-    <meta name="twitter:description" content="あなたのClaude Codeセキュリティ感覚を10問でチェック" />
+    <meta
+      name="twitter:description"
+      content="あなたのClaude Codeセキュリティ感覚を10問でチェック"
+    />
     <meta name="twitter:image" content={ogImageUrl} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600;700&family=Source+Serif+Pro:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    {
+      enableGa && (
+        <>
+          <script
+            is:inline
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          />
+          <script is:inline define:vars={{ gaId: GA_MEASUREMENT_ID }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(...args) {
+              dataLayer.push(args);
+            }
+            gtag('js', new Date());
+            gtag('config', gaId);
+          </script>
+        </>
+      )
+    }
   </head>
   <body>
     <slot />
     <script>
-      import '../scripts/main';
+      import '../lib/main';
     </script>
   </body>
 </html>
