@@ -2,6 +2,7 @@ import { getLang, getTranslations, onLangChange } from './i18n';
 import { getRankKey } from './rank';
 import { highlightScenario, escapeAttr } from './highlight';
 import { buildShareUrl, buildXIntentUrl, copyToClipboard } from './share';
+import { trackEvent } from './analytics';
 
 interface AnswerLog {
   q: number;
@@ -96,6 +97,13 @@ export function initQuiz(): void {
   refs.nextBtn.addEventListener('click', nextQuestion);
   $('restart-btn').addEventListener('click', restart);
   refs.shareCopy.addEventListener('click', onCopyClick);
+  refs.shareX.addEventListener('click', () => {
+    trackEvent('share_click', {
+      method: 'twitter',
+      score: state.score,
+      lang: getLang(),
+    });
+  });
 
   onLangChange(() => {
     if (state.screen === 'quiz') renderQuestion();
@@ -112,6 +120,7 @@ function startQuiz(): void {
   refs.quiz.classList.add('active');
   refs.result.classList.remove('active');
   renderQuestion();
+  trackEvent('quiz_start', { lang: getLang() });
 }
 
 function getCurrentAnswer(): AnswerLog | undefined {
@@ -241,11 +250,16 @@ function showResult(): void {
   refs.result.classList.add('active');
   renderResult();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  trackEvent('quiz_complete', {
+    score: state.score,
+    rank: getRankKey(state.score),
+    lang: getLang(),
+  });
 }
 
 function renderResult(): void {
   const t = getTranslations();
-  refs.finalScore.textContent = String(state.score);
+  refs.finalScore.textContent = String(state.score * 10);
 
   const rankKey = getRankKey(state.score);
   const rank = t.ui.ranks[rankKey];
@@ -293,10 +307,16 @@ function restart(): void {
   refs.quiz.classList.remove('active');
   refs.intro.style.display = 'block';
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  trackEvent('quiz_restart', { lang: getLang() });
 }
 
 async function onCopyClick(): Promise<void> {
   await copyToClipboard(buildShareUrl(state.score, getLang()));
   refs.copiedToast.classList.add('show');
   setTimeout(() => refs.copiedToast.classList.remove('show'), 2000);
+  trackEvent('share_click', {
+    method: 'copy',
+    score: state.score,
+    lang: getLang(),
+  });
 }

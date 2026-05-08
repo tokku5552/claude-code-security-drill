@@ -164,15 +164,19 @@ def main():
 
     for score in range(11):
         rank, _ = get_rank(score, args.lang)
+        # `display_score` is the human-facing 0-100 number used in titles and
+        # body copy; `score` (0-10) keeps mapping cleanly to og/{N}.png file
+        # names so we don't churn 22 image filenames whenever the scale changes.
+        display_score = score * 10
         html = TEMPLATE.format(
             html_lang=s["html_lang"],
-            page_title=s["page_title"].format(score=score, rank=rank),
-            og_title=s["og_title"].format(score=score, rank=rank),
-            og_desc=s["og_desc"].format(score=score, rank=rank),
-            tw_desc=s["tw_desc"].format(score=score, rank=rank),
+            page_title=s["page_title"].format(score=display_score, rank=rank),
+            og_title=s["og_title"].format(score=display_score, rank=rank),
+            og_desc=s["og_desc"].format(score=display_score, rank=rank),
+            tw_desc=s["tw_desc"].format(score=display_score, rank=rank),
             label=s["label"],
-            headline_html=s["headline_html"].format(score=score, rank=rank),
-            rank_label=s["rank_label"].format(score=score, rank=rank),
+            headline_html=s["headline_html"].format(score=display_score, rank=rank),
+            rank_label=s["rank_label"].format(score=display_score, rank=rank),
             body=s["body"],
             cta=s["cta"],
             repo_link=s["repo_link"],

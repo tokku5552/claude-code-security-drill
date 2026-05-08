@@ -40,8 +40,11 @@ def make_cover(lang, output_path):
 
     draw.line([(60, 95), (W - 60, 95)], fill=LINE, width=1)
 
-    # Main title — large, multi-segment, multi-line
-    title_font = load_font("sans_bold", 88, lang)
+    # Main title — large, multi-segment, multi-line.
+    # JA has more glyphs in the second line ("セキュリティ理解度チェック", 13 CJK chars)
+    # so it needs a smaller size to fit within the 1080px content area.
+    title_font_size = 76 if lang == "ja" else 88
+    title_font = load_font("sans_bold", title_font_size, lang)
     title_lines = COVER_STRINGS[lang]["title_lines"]
     line_y_start = 160
     line_height = 110

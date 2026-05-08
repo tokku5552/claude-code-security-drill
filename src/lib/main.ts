@@ -7,6 +7,7 @@ import '../styles/result.css';
 import { initI18n, setLang, getLang } from './i18n';
 import type { Lang } from './types';
 import { initQuiz } from './quiz';
+import { trackEvent } from './analytics';
 
 function bindLangToggle(): void {
   document
@@ -15,7 +16,10 @@ function bindLangToggle(): void {
       const target = btn.getAttribute('data-lang-btn') as Lang | null;
       if (!target) return;
       btn.addEventListener('click', () => {
-        if (target !== getLang()) setLang(target);
+        const from = getLang();
+        if (target === from) return;
+        trackEvent('lang_change', { from, to: target });
+        setLang(target);
       });
     });
 }

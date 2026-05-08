@@ -8,7 +8,7 @@ interface Props {
 }
 
 const {
-  title = 'Claude Code セキュリティ・クイズ / SECURITY DRILL #001',
+  title = 'Claude Code セキュリティ理解度チェック',
   description = 'Claude Codeを使うすべての人のためのセキュリティ・クイズ全10問。所要時間 約7分。あなたのスコアは？',
   ogImage = 'og/cover.png',
 } = Astro.props;
@@ -35,7 +35,7 @@ const enableGa = import.meta.env.PROD && Boolean(GA_MEASUREMENT_ID);
     <title>{title}</title>
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Claude Code セキュリティ・ドリル" />
+    <meta property="og:title" content="Claude Code セキュリティ理解度チェック" />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={ogImageUrl} />
@@ -44,7 +44,7 @@ const enableGa = import.meta.env.PROD && Boolean(GA_MEASUREMENT_ID);
     <meta property="og:site_name" content="Claude Code Security Drill" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Claude Code セキュリティ・ドリル" />
+    <meta name="twitter:title" content="Claude Code セキュリティ理解度チェック" />
     <meta
       name="twitter:description"
       content="あなたのClaude Codeセキュリティ感覚を10問でチェック"
