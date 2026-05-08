@@ -152,8 +152,8 @@ def og_rank_subtitle(score, lang):
 COVER_STRINGS = {
     "ja": {
         "title_lines": [
-            [("便利と", "INK"), ("危険", "ACCENT"), ("は、", "INK")],
-            [("紙一重。", "INK")],
+            [("Claude Code", "INK")],
+            [("セキュリティ", "ACCENT"), ("理解度チェック", "INK")],
         ],
         "subtitle_lines": [
             "Claude Codeを使うすべての人のための",
@@ -163,8 +163,8 @@ COVER_STRINGS = {
     },
     "en": {
         "title_lines": [
-            [("Useful and ", "INK"), ("dangerous", "ACCENT")],
-            [("are a hair apart.", "INK")],
+            [("Claude Code", "INK")],
+            [("Security", "ACCENT"), (" Quiz", "INK")],
         ],
         "subtitle_lines": [
             "A security quiz for everyone",

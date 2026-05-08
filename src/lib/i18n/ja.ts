@@ -2,12 +2,13 @@ import type { Translations } from '../types';
 
 const ja: Translations = {
   ui: {
-    htmlTitle: 'Claude Code セキュリティ・クイズ / SECURITY DRILL #001',
+    htmlTitle: 'Claude Code セキュリティ理解度チェック',
 
     topbarRight: '2026',
 
     heroMeta: '全10問',
-    heroTitleHtml: '便利と<span class="accent">危険</span>は、<br>紙一重。',
+    heroTitleHtml:
+      'Claude Code<br><span class="accent">セキュリティ</span>理解度チェック',
     heroLedeHtml:
       'Claude Codeはあなたのファイルを読み、コマンドを実行し、外部サービスとも繋がる。その<strong>強力さ</strong>は、そのまま<strong>攻撃面</strong>でもあります。<br><br>このドリルは、「何を許して、何を許してはいけないか」の感覚を身につけるための10問です。所要時間は約7分。',
 

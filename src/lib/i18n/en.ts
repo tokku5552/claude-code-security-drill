@@ -2,13 +2,13 @@ import type { Translations } from '../types';
 
 const en: Translations = {
   ui: {
-    htmlTitle: 'Claude Code Security Quiz / SECURITY DRILL #001',
+    htmlTitle: 'Claude Code Security Quiz',
 
     topbarRight: '2026',
 
     heroMeta: '10 questions',
     heroTitleHtml:
-      'Useful and <span class="accent">dangerous</span><br>are a hair apart.',
+      'Claude Code<br><span class="accent">Security</span> Quiz',
     heroLedeHtml:
       'Claude Code reads your files, runs commands, and connects to external services. That <strong>power</strong> is also your <strong>attack surface</strong>.<br><br>This drill is 10 questions to sharpen your sense of what to allow — and what not to. About 7 minutes.',
 
