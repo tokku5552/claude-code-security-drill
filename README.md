@@ -12,7 +12,7 @@ JA / EN のページ内トグルに対応。
      site: 'https://YOUR_USER.github.io',
      base: '/YOUR_REPO',
      ```
-   - `src/scripts/config.ts` の `REPO_URL`（必要なら `HASHTAGS` も）
+   - `src/lib/config.ts` の `REPO_URL`（必要なら `HASHTAGS` も）
 3. GitHub Pagesを有効化（Settings → Pages → **Source: GitHub Actions**）
 4. `main` ブランチに push すると `.github/workflows/deploy.yml` が走り、自動でデプロイされる
 
@@ -101,4 +101,4 @@ find public/share -name "*.html" -exec sed -i \
 - 画面右上のトグル（`JA` / `EN`）で切替。選択は `localStorage['ccsd:lang']` に保存。
 - 初回訪問時はブラウザ言語が `en*` なら EN、それ以外は JA で起動。
 - URL は単一（言語ごとのルートは無し）。クイズ途中で切り替えても進捗とスコアは保持される。
-- EN 訳の追加・修正は `src/scripts/i18n/en.ts` を編集して `pnpm build`。
+- EN 訳の追加・修正は `src/lib/i18n/en.ts` を編集して `pnpm build`。

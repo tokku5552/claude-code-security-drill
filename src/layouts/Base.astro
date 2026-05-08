@@ -1,4 +1,6 @@
 ---
+import { GA_MEASUREMENT_ID } from '../lib/config';
+
 interface Props {
   title?: string;
   description?: string;
@@ -22,7 +24,6 @@ const canonicalUrl = baseUrl.toString();
 
 // GA4 — only embedded in production builds. pnpm dev keeps it off so dev
 // traffic doesn't pollute analytics. The ID itself is public (see config.ts).
-import { GA_MEASUREMENT_ID } from '../scripts/config';
 const enableGa = import.meta.env.PROD && Boolean(GA_MEASUREMENT_ID);
 ---
 
@@ -75,7 +76,7 @@ gtag('config', gaId);`}
   <body>
     <slot />
     <script>
-      import '../scripts/main';
+      import '../lib/main';
     </script>
   </body>
 </html>

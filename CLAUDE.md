@@ -43,8 +43,8 @@ done
 ビルド成果物は完全静的（`output: 'static'`）。Astro はテンプレートとビルドパイプラインだけを担当し、**i18n は実行時クライアント側**。`/ja/` `/en/` のような言語別ルートは作らず、単一 URL でトグルする。
 
 - `src/pages/index.astro` がルート。`Base.astro`（`<head>` / OGP / フォント）の中に `TopBar` / `IntroScreen` / `QuizScreen` / `ResultScreen` / `Footer` を並べる。
-- 静的テキスト要素には `data-i18n="ui.key"` または `data-i18n-html="ui.key"` 属性を付け、`src/scripts/i18n/index.ts` の `applyStaticTranslations()` が DOM を走査して `textContent` / `innerHTML` を置換する。
-- 動的要素（設問、選択肢、解説、ランクメッセージ、breakdown）は `src/scripts/quiz.ts` が `getTranslations()` 経由で都度引いて描画する。
+- 静的テキスト要素には `data-i18n="ui.key"` または `data-i18n-html="ui.key"` 属性を付け、`src/lib/i18n/index.ts` の `applyStaticTranslations()` が DOM を走査して `textContent` / `innerHTML` を置換する。
+- 動的要素（設問、選択肢、解説、ランクメッセージ、breakdown）は `src/lib/quiz.ts` が `getTranslations()` 経由で都度引いて描画する。
 - `onLangChange()` で `quiz.ts` が言語切替を購読し、現在の `screen` に応じて再描画する（途中切替えても進捗・スコアは保持）。
 - 言語の永続化キーは `localStorage['ccsd:lang']`。未設定時は `navigator.language` が `en*` なら EN、それ以外は JA。
 
@@ -52,17 +52,17 @@ done
 
 `public/share/[en/]N.html`（N: 0..10）が OGP の `og:image` で対応する `public/og/[en/]N.png` を指し、自身は `<meta http-equiv="refresh">` でクイズ本体にリダイレクトする（`../index.html` または `../../index.html`）。
 
-クイズ結果画面の X intent URL は `${SITE_URL}/share[/en]/${score}.html` を共有 URL として渡す。言語別ディレクトリの切替えは `src/scripts/share.ts` の `buildShareUrl(score, lang)` で行い、`quiz.ts` が `getLang()` を渡す。`SITE_URL` は `astro.config.mjs` の `site` + `base` から `import.meta.env` 経由で組み立てる（`src/scripts/config.ts`）。
+クイズ結果画面の X intent URL は `${SITE_URL}/share[/en]/${score}.html` を共有 URL として渡す。言語別ディレクトリの切替えは `src/lib/share.ts` の `buildShareUrl(score, lang)` で行い、`quiz.ts` が `getLang()` を渡す。`SITE_URL` は `astro.config.mjs` の `site` + `base` から `import.meta.env` 経由で組み立てる（`src/lib/config.ts`）。
 
 ### スコアしきい値の単一ソース化（JS 側）
 
-しきい値（10 / 8 / 6 / 4 のランク境界）は `src/scripts/rank.ts` の `getRankKey()` 1 箇所で定義。`quiz.ts` が rank キーを引き、`getTranslations().ui.ranks[key]` と `resultMessages[key]` で文字列を解決する。
+しきい値（10 / 8 / 6 / 4 のランク境界）は `src/lib/rank.ts` の `getRankKey()` 1 箇所で定義。`quiz.ts` が rank キーを引き、`getTranslations().ui.ranks[key]` と `resultMessages[key]` で文字列を解決する。
 
 Python 側は `scripts/_common.py` の `get_rank()` 1 箇所に集約済み。ランク基準を変更する場合は **JS 側 1 箇所（`rank.ts`）+ Python 側 1 箇所（`_common.py`）** の同期が必要。
 
 ### 設問データ構造
 
-`src/scripts/types.ts` の `Question` 型に従う。`ja.ts` / `en.ts` は **同じ順序で 10 件**の `questions` 配列を持つ必要がある（`answer` インデックスも同じ）。`explanation` は `<strong>`、`<br>`、`<code>`、`<pre>` を含む制限付き HTML。`scenario`（任意）は `highlight.ts` の `highlightScenario()` がエスケープ後に `SYSTEM:` と JSON キー / 文字列値のスパンを注入する非純粋関数で描画される。
+`src/lib/types.ts` の `Question` 型に従う。`ja.ts` / `en.ts` は **同じ順序で 10 件**の `questions` 配列を持つ必要がある（`answer` インデックスも同じ）。`explanation` は `<strong>`、`<br>`、`<code>`、`<pre>` を含む制限付き HTML。`scenario`（任意）は `highlight.ts` の `highlightScenario()` がエスケープ後に `SYSTEM:` と JSON キー / 文字列値のスパンを注入する非純粋関数で描画される。
 
 ## 編集時の注意
 
