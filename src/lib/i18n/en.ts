@@ -82,7 +82,7 @@ const en: Translations = {
     },
 
     shareTweetText: (score: number, rank: string) =>
-      `I scored ${score}/10 on the Claude Code Security Drill! (${rank})\nThink you can do better?`,
+      `I scored ${score * 10} pts on the Claude Code Security Quiz! (${rank})\nThink you can do better?`,
   },
 
   questions: [

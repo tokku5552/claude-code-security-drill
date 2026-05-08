@@ -245,7 +245,7 @@ function showResult(): void {
 
 function renderResult(): void {
   const t = getTranslations();
-  refs.finalScore.textContent = String(state.score);
+  refs.finalScore.textContent = String(state.score * 10);
 
   const rankKey = getRankKey(state.score);
   const rank = t.ui.ranks[rankKey];

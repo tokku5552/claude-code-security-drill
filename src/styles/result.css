@@ -32,12 +32,6 @@
   color: var(--ink);
 }
 
-.result-hero .score .out-of {
-  font-size: 0.4em;
-  color: var(--ink-faint);
-  font-weight: 400;
-}
-
 .result-hero .rank {
   font-family: var(--mono);
   font-size: 12px;

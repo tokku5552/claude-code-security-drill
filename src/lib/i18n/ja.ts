@@ -79,7 +79,7 @@ const ja: Translations = {
     },
 
     shareTweetText: (score: number, rank: string) =>
-      `Claude Codeセキュリティドリルで ${score}/10 とった！(${rank})\n君も試してみる?`,
+      `Claude Codeセキュリティ理解度チェックで ${score * 10}点 とった！(${rank})\n君も試してみる?`,
   },
 
   questions: [
