@@ -9,13 +9,15 @@ import type { Lang } from './types';
 import { initQuiz } from './quiz';
 
 function bindLangToggle(): void {
-  document.querySelectorAll<HTMLButtonElement>('[data-lang-btn]').forEach((btn) => {
-    const target = btn.getAttribute('data-lang-btn') as Lang | null;
-    if (!target) return;
-    btn.addEventListener('click', () => {
-      if (target !== getLang()) setLang(target);
+  document
+    .querySelectorAll<HTMLButtonElement>('[data-lang-btn]')
+    .forEach((btn) => {
+      const target = btn.getAttribute('data-lang-btn') as Lang | null;
+      if (!target) return;
+      btn.addEventListener('click', () => {
+        if (target !== getLang()) setLang(target);
+      });
     });
-  });
 }
 
 function start(): void {

@@ -15,7 +15,10 @@ function detectInitialLang(): Lang {
   } catch {
     /* localStorage may be unavailable */
   }
-  if (typeof navigator !== 'undefined' && navigator.language?.toLowerCase().startsWith('en')) {
+  if (
+    typeof navigator !== 'undefined' &&
+    navigator.language?.toLowerCase().startsWith('en')
+  ) {
     return 'en';
   }
   return 'ja';
@@ -79,10 +82,12 @@ function applyStaticTranslations(): void {
     if (typeof v === 'string') el.innerHTML = v;
   });
 
-  document.querySelectorAll<HTMLButtonElement>('[data-lang-btn]').forEach((btn) => {
-    btn.setAttribute(
-      'aria-pressed',
-      String(btn.getAttribute('data-lang-btn') === currentLang),
-    );
-  });
+  document
+    .querySelectorAll<HTMLButtonElement>('[data-lang-btn]')
+    .forEach((btn) => {
+      btn.setAttribute(
+        'aria-pressed',
+        String(btn.getAttribute('data-lang-btn') === currentLang),
+      );
+    });
 }

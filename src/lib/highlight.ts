@@ -11,8 +11,14 @@ export function highlightScenario(str: string): string {
     /("(?:[a-zA-Z_$][\w$]*|[^"]+)")(\s*:)/g,
     '<span class="json-key">$1</span>$2',
   );
-  html = html.replace(/(:\s*)("[^"]*")/g, '$1<span class="json-string">$2</span>');
-  html = html.replace(/(\[\s*|,\s*)("[^"]*")/g, '$1<span class="json-string">$2</span>');
+  html = html.replace(
+    /(:\s*)("[^"]*")/g,
+    '$1<span class="json-string">$2</span>',
+  );
+  html = html.replace(
+    /(\[\s*|,\s*)("[^"]*")/g,
+    '$1<span class="json-string">$2</span>',
+  );
   return html;
 }
 

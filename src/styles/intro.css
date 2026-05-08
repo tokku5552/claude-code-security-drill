@@ -79,7 +79,10 @@
   font-weight: 600;
   letter-spacing: 0;
   cursor: pointer;
-  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  transition:
+    background 0.18s,
+    color 0.18s,
+    border-color 0.18s;
 }
 
 .start-btn:hover {

@@ -27,7 +27,7 @@ const canonicalUrl = baseUrl.toString();
 const enableGa = import.meta.env.PROD && Boolean(GA_MEASUREMENT_ID);
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
@@ -45,7 +45,10 @@ const enableGa = import.meta.env.PROD && Boolean(GA_MEASUREMENT_ID);
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Claude Code セキュリティ・ドリル" />
-    <meta name="twitter:description" content="あなたのClaude Codeセキュリティ感覚を10問でチェック" />
+    <meta
+      name="twitter:description"
+      content="あなたのClaude Codeセキュリティ感覚を10問でチェック"
+    />
     <meta name="twitter:image" content={ogImageUrl} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -64,10 +67,12 @@ const enableGa = import.meta.env.PROD && Boolean(GA_MEASUREMENT_ID);
             src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           />
           <script is:inline define:vars={{ gaId: GA_MEASUREMENT_ID }}>
-            {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', gaId);`}
+            window.dataLayer = window.dataLayer || [];
+            function gtag(...args) {
+              dataLayer.push(args);
+            }
+            gtag('js', new Date());
+            gtag('config', gaId);
           </script>
         </>
       )

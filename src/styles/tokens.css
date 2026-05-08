@@ -11,8 +11,8 @@
   /* Accent — warm brick. Inspired by Claude Orange but shifted toward red
      so it doesn't pixel-match the official brand color. */
   --accent: #c66344;
-  --accent-soft: rgba(198, 99, 68, 0.10);
-  --accent-line: rgba(198, 99, 68, 0.40);
+  --accent-soft: rgba(198, 99, 68, 0.1);
+  --accent-line: rgba(198, 99, 68, 0.4);
 
   /* Status colors — softened, not screaming */
   --safe: #7aab87;
@@ -20,13 +20,16 @@
   --danger: #c4564b;
 
   /* Lines / dividers on warm dark */
-  --line: rgba(250, 249, 245, 0.10);
+  --line: rgba(250, 249, 245, 0.1);
   --line-soft: rgba(250, 249, 245, 0.06);
 
   /* Type stacks. Latin first, then JP fallback so each script gets the
      family that draws it best. */
-  --serif: 'Source Serif Pro', 'Noto Serif JP', Georgia, 'Times New Roman', serif;
-  --sans: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  --serif:
+    'Source Serif Pro', 'Noto Serif JP', Georgia, 'Times New Roman', serif;
+  --sans:
+    'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Helvetica Neue',
+    sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 }
 

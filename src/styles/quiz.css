@@ -91,7 +91,7 @@
 
 .scenario-box .highlight {
   color: var(--warn);
-  background: rgba(201, 146, 63, 0.10);
+  background: rgba(201, 146, 63, 0.1);
   padding: 1px 4px;
 }
 
@@ -136,7 +136,9 @@
   font-family: var(--sans);
   font-size: 15px;
   line-height: 1.7;
-  transition: border-color 0.15s, background 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
   display: flex;
   align-items: flex-start;
   gap: 14px;
@@ -160,7 +162,9 @@
   border: 1px solid var(--line);
   padding: 2px 8px;
   flex-shrink: 0;
-  transition: color 0.15s, border-color 0.15s;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
 }
 
 .option:hover:not(:disabled) .key {
@@ -348,7 +352,9 @@
   color: var(--ink);
   text-decoration: none;
   border-bottom: 1px solid var(--ink-faint);
-  transition: color 0.15s, border-color 0.15s;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
   word-break: break-all;
 }
 
@@ -374,7 +380,10 @@
   font-weight: 600;
   letter-spacing: 0;
   cursor: pointer;
-  transition: background 0.18s, color 0.18s, border-color 0.18s;
+  transition:
+    background 0.18s,
+    color 0.18s,
+    border-color 0.18s;
   display: none;
 }
 

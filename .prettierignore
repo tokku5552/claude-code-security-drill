@@ -1,0 +1,11 @@
+dist
+node_modules
+.astro
+.venv
+public/og
+public/share
+pnpm-lock.yaml
+
+# prettier-plugin-astro currently mis-parses the GA snippet inside
+# <script is:inline define:vars>. Skip the layout until the plugin handles it.
+src/layouts/Base.astro

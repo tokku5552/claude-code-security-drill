@@ -79,7 +79,9 @@ footer a {
   color: var(--ink-dim);
   border-bottom: 1px solid transparent;
   text-decoration: none;
-  transition: color 0.18s, border-color 0.18s;
+  transition:
+    color 0.18s,
+    border-color 0.18s;
 }
 
 footer a:hover {
