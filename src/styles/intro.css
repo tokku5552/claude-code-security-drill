@@ -100,6 +100,39 @@
   transform: translateX(4px);
 }
 
+.intro-share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+  margin-left: 16px;
+  padding: 10px 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--ink-faint);
+  text-decoration: none;
+  transition: color 0.18s;
+}
+
+.intro-share-btn:hover {
+  color: var(--accent);
+}
+
+.intro-share-btn svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+@media (max-width: 600px) {
+  .intro-share-btn {
+    margin-left: 0;
+    display: flex;
+    margin-top: 16px;
+  }
+}
+
 /* ===== TOPICS PREVIEW ===== */
 .topics {
   margin-top: 56px;

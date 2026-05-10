@@ -18,6 +18,19 @@ export function buildXIntentUrl(
   return xUrl.toString();
 }
 
+export function buildTopShareUrl(lang: Lang): string {
+  const langSeg = lang === 'en' ? '/en' : '';
+  return `${SITE_URL}/share${langSeg}/top.html`;
+}
+
+export function buildTopXIntentUrl(lang: Lang, tweetText: string): string {
+  const xUrl = new URL('https://twitter.com/intent/tweet');
+  xUrl.searchParams.set('text', tweetText);
+  xUrl.searchParams.set('url', buildTopShareUrl(lang));
+  if (HASHTAGS) xUrl.searchParams.set('hashtags', HASHTAGS);
+  return xUrl.toString();
+}
+
 export async function copyToClipboard(text: string): Promise<void> {
   try {
     await navigator.clipboard.writeText(text);

@@ -71,6 +71,9 @@ export interface UiStrings {
   shareCopyBtn: string;
   copiedToast: string;
 
+  shareTopBtn: string;
+  shareTopTweetText: string;
+
   restartBtn: string;
   footerHtml: string;
 

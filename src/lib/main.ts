@@ -4,10 +4,11 @@ import '../styles/intro.css';
 import '../styles/quiz.css';
 import '../styles/result.css';
 
-import { initI18n, setLang, getLang } from './i18n';
+import { initI18n, setLang, getLang, getTranslations, onLangChange } from './i18n';
 import type { Lang } from './types';
 import { initQuiz } from './quiz';
 import { trackEvent } from './analytics';
+import { buildTopXIntentUrl } from './share';
 
 function bindLangToggle(): void {
   document
@@ -24,10 +25,33 @@ function bindLangToggle(): void {
     });
 }
 
+function bindIntroShare(): void {
+  const btn = document.getElementById(
+    'intro-share-x',
+  ) as HTMLAnchorElement | null;
+  if (!btn) return;
+
+  const update = (): void => {
+    const t = getTranslations();
+    btn.href = buildTopXIntentUrl(getLang(), t.ui.shareTopTweetText);
+  };
+  update();
+  onLangChange(update);
+
+  btn.addEventListener('click', () => {
+    trackEvent('share_click', {
+      method: 'twitter',
+      surface: 'intro',
+      lang: getLang(),
+    });
+  });
+}
+
 function start(): void {
   initI18n();
   initQuiz();
   bindLangToggle();
+  bindIntroShare();
 }
 
 if (document.readyState === 'loading') {
