@@ -23,16 +23,17 @@ OGP 画像とスコア別シェアページの再生成（Pillow 必要、Linux 
 # 初回のみ
 python3 -m venv .venv && .venv/bin/pip install Pillow
 
-# 各スクリプトは --lang ja|en を取る。3 本セットで言語ごとに走らせる
+# 各スクリプトは --lang ja|en を取る。4 本セットで言語ごとに走らせる
 for lang in ja en; do
   .venv/bin/python scripts/generate_og_images.py --lang $lang
   .venv/bin/python scripts/generate_cover.py --lang $lang
   .venv/bin/python scripts/generate_share_pages.py --lang $lang
+  .venv/bin/python scripts/generate_top_share.py --lang $lang
 done
 # share/*.html / share/en/*.html の __SITE_URL__ / __REPO_URL__ を sed で置換（README 参照）
 ```
 
-`scripts/_common.py` がフォント探索・出力先パス解決・翻訳辞書（`OG_STRINGS` / `COVER_STRINGS` / `SHARE_STRINGS`）・しきい値（`get_rank`）を一手に持つ。3 つの生成スクリプトはここから引いて描画する。
+`scripts/_common.py` がフォント探索・出力先パス解決・翻訳辞書（`OG_STRINGS` / `COVER_STRINGS` / `SHARE_STRINGS` / `TOP_SHARE_STRINGS`）・しきい値（`get_rank`）を一手に持つ。4 つの生成スクリプトはここから引いて描画する。
 
 ローカルで OGP を視認したいとき: PNG は `open public/og/en/8.png` で直接開く。share ページの meta は `pnpm preview &` 後 `curl -s http://localhost:4321/claude-code-security-drill/share/en/8.html | grep -E '(og:|twitter:)'`。実カードを X / FB 等の見え方で確認したいときは cloudflared でトンネルして opengraph.xyz に貼る。
 
@@ -54,6 +55,10 @@ done
 
 クイズ結果画面の X intent URL は `${SITE_URL}/share[/en]/${score}.html` を共有 URL として渡す。言語別ディレクトリの切替えは `src/lib/share.ts` の `buildShareUrl(score, lang)` で行い、`quiz.ts` が `getLang()` を渡す。`SITE_URL` は `astro.config.mjs` の `site` + `base` から `import.meta.env` 経由で組み立てる（`src/lib/config.ts`）。
 
+### トップページの X シェア（JA / EN 両対応）
+
+`IntroScreen.astro` の `#intro-share-x` ボタンは `${SITE_URL}/share[/en]/top.html` を共有 URL として X に渡す。`top.html` は OGP で `og/[en/]cover.png`（ブランドカバー）を指し、人間アクセスには refresh で `index.html` に飛ばす。URL ビルドは `share.ts` の `buildTopShareUrl(lang)` / `buildTopXIntentUrl(lang, text)`。ボタンの `href` は `main.ts:bindIntroShare()` が `getLang()` と `onLangChange()` を見て差し替える（言語トグルに追従）。
+
 ### スコアしきい値の単一ソース化（JS 側）
 
 しきい値（10 / 8 / 6 / 4 のランク境界）は `src/lib/rank.ts` の `getRankKey()` 1 箇所で定義。`quiz.ts` が rank キーを引き、`getTranslations().ui.ranks[key]` と `resultMessages[key]` で文字列を解決する。
@@ -70,5 +75,5 @@ Python 側は `scripts/_common.py` の `get_rank()` 1 箇所に集約済み。�
 2. `Base.astro` の `<title>` と OGP meta は JA 固定（クローラ向けの 1 言語のため）。クイズ本体の表示文言は `data-i18n` で切替わるが、`<head>` 配下は JS 実行前に読まれるため動的にしていない。シェアカード自体は `share[/en]/*.html` に各言語版があり、X/FB クローラはアクセスする URL に応じて適切な言語のカードを取得する。
 3. `option` のテキストは `escapeAttr()` を通して `innerHTML` に挿入される。HTML を含めない前提。
 4. `explanation` / `resultMessages` / `heroLedeHtml` / `heroTitleHtml` / `footerHtml` は HTML 含む。`<script>` や `<style>` を入れない。
-5. クイズ問題数は `quiz.ts` の `TOTAL = 10` でハードコード。シェア用アセット（`public/share/0..10.html` / `public/og/0..10.png`）と整合させているため、数を変える場合は両方を再生成する。
+5. クイズ問題数は `quiz.ts` の `TOTAL = 10` でハードコード。シェア用アセット（`public/share/0..10.html` / `public/og/0..10.png` + `share/[en/]top.html`）と整合させているため、数を変える場合は両方を再生成する。
 6. デプロイは `.github/workflows/deploy.yml` が `main` push をトリガに `actions/deploy-pages` で公開する。Pages 設定は **Source: GitHub Actions** が前提。

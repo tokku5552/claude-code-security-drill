@@ -48,8 +48,8 @@ pnpm preview  # ビルド結果のプレビュー
 ├── public/
 │   ├── og/                       # JA OGP（0..10.png + cover.png）
 │   ├── og/en/                    # EN OGP（0..10.png + cover.png）
-│   ├── share/                    # JA スコア別シェアページ（0..10.html）
-│   └── share/en/                 # EN スコア別シェアページ（0..10.html）
+│   ├── share/                    # JA スコア別シェアページ（0..10.html）+ top.html
+│   └── share/en/                 # EN スコア別シェアページ（0..10.html）+ top.html
 └── scripts/                      # OGP/シェアページの再生成用 Python（--lang ja|en）
 ```
 
@@ -62,9 +62,11 @@ pnpm preview  # ビルド結果のプレビュー
 
 JA / EN それぞれ専用のシェアカードを用意しているので、見ている言語のままシェアされる。
 
+トップページ（intro 画面）にも X シェアボタンがあり、こちらは `share/[en/]top.html` を共有する。`top.html` は `og/[en/]cover.png` を指すため、X / Slack には JA / EN それぞれのブランドカバーが表示される。
+
 ## 🛠 OGP画像とシェアページの再生成
 
-`scripts/` の 3 本は `--lang ja|en` で言語を指定する。Linux（Noto CJK）と macOS（Hiragino Sans GB）のフォントを自動検出する。
+`scripts/` の 4 本は `--lang ja|en` で言語を指定する。Linux（Noto CJK）と macOS（Hiragino Sans GB）のフォントを自動検出する。
 
 ```sh
 python3 -m venv .venv && .venv/bin/pip install Pillow
@@ -73,11 +75,13 @@ python3 -m venv .venv && .venv/bin/pip install Pillow
 .venv/bin/python scripts/generate_og_images.py --lang ja
 .venv/bin/python scripts/generate_cover.py --lang ja
 .venv/bin/python scripts/generate_share_pages.py --lang ja
+.venv/bin/python scripts/generate_top_share.py --lang ja
 
 # EN
 .venv/bin/python scripts/generate_og_images.py --lang en
 .venv/bin/python scripts/generate_cover.py --lang en
 .venv/bin/python scripts/generate_share_pages.py --lang en
+.venv/bin/python scripts/generate_top_share.py --lang en
 ```
 
 share ページのみ生成後に `__SITE_URL__` / `__REPO_URL__` プレースホルダを sed で置換する:

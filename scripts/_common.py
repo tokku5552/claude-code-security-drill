@@ -175,6 +175,39 @@ COVER_STRINGS = {
 }
 
 
+# Top-page share landing strings (single page per language; no per-score variant).
+# Used by generate_top_share.py to produce public/share/[en/]top.html. The OGP
+# image points at og/[en/]cover.png so the top-share card matches the brand cover.
+TOP_SHARE_STRINGS = {
+    "ja": {
+        "html_lang": "ja",
+        "page_title": "Claude Codeセキュリティ理解度チェック",
+        "og_title": "Claude Codeセキュリティ理解度チェック",
+        "og_desc": "Claude Codeを使うすべての人のためのセキュリティ・クイズ全10問。所要時間 約7分。あなたのスコアは？",
+        "tw_desc": "あなたのClaude Codeセキュリティ感覚を10問でチェック",
+        "label": "// SECURITY DRILL",
+        "headline_html": 'Claude Code<br><span class="accent">セキュリティ</span>理解度チェック',
+        "subhead": "全10問 · 約7分",
+        "body": "Claude Codeはあなたのファイルを読み、コマンドを実行し、外部サービスとも繋がる。その「強力さ」は、そのまま「攻撃面」でもあります。",
+        "cta": "ドリルを始める →",
+        "repo_link": "↗ View on GitHub",
+    },
+    "en": {
+        "html_lang": "en",
+        "page_title": "Claude Code Security Quiz",
+        "og_title": "Claude Code Security Quiz",
+        "og_desc": "A 10-question security quiz for everyone using Claude Code. About 7 minutes. What's your score?",
+        "tw_desc": "Sharpen your Claude Code security instincts in 10 questions.",
+        "label": "// SECURITY DRILL",
+        "headline_html": 'Claude Code<br><span class="accent">Security</span> Quiz',
+        "subhead": "10 QUESTIONS · ~7 MIN",
+        "body": "Claude Code reads your files, runs commands, and connects to external services. That power is also your attack surface.",
+        "cta": "Start the drill →",
+        "repo_link": "↗ View on GitHub",
+    },
+}
+
+
 # Share-page (HTML) strings.
 SHARE_STRINGS = {
     "ja": {

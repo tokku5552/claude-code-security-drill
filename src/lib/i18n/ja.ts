@@ -54,6 +54,10 @@ const ja: Translations = {
     shareCopyBtn: 'リンクをコピー',
     copiedToast: '✓ Copied to clipboard',
 
+    shareTopBtn: 'このドリルをXでシェア',
+    shareTopTweetText:
+      'Claude Codeセキュリティ理解度チェック\nClaude Codeを使うすべての人のためのセキュリティ・クイズ全10問。あなたも試してみる?',
+
     restartBtn: 'もう一度挑戦する ↻',
     footerHtml:
       'Claude Code Security Drill · Stay paranoid. Stay productive.<br>An independent project, not affiliated with Anthropic · Built by <a href="https://www.tokku-tech.dev/" target="_blank" rel="noopener noreferrer">tokku</a> · 2026',

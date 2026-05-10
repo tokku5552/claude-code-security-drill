@@ -55,6 +55,10 @@ const en: Translations = {
     shareCopyBtn: 'Copy link',
     copiedToast: '✓ Copied to clipboard',
 
+    shareTopBtn: 'Share this drill on X',
+    shareTopTweetText:
+      'Claude Code Security Quiz\nA 10-question security drill for everyone using Claude Code. Think you can ace it?',
+
     restartBtn: 'Try again ↻',
     footerHtml:
       'Claude Code Security Drill · Stay paranoid. Stay productive.<br>An independent project, not affiliated with Anthropic · Built by <a href="https://www.tokku-tech.dev/" target="_blank" rel="noopener noreferrer">tokku</a> · 2026',
