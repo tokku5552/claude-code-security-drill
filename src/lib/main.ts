@@ -4,7 +4,13 @@ import '../styles/intro.css';
 import '../styles/quiz.css';
 import '../styles/result.css';
 
-import { initI18n, setLang, getLang, getTranslations, onLangChange } from './i18n';
+import {
+  initI18n,
+  setLang,
+  getLang,
+  getTranslations,
+  onLangChange,
+} from './i18n';
 import type { Lang } from './types';
 import { initQuiz } from './quiz';
 import { trackEvent } from './analytics';

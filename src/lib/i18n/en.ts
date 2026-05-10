@@ -57,7 +57,7 @@ const en: Translations = {
 
     shareTopBtn: 'Share this drill on X',
     shareTopTweetText:
-      "Claude Code Security Quiz\nA 10-question security drill for everyone using Claude Code. Think you can ace it?",
+      'Claude Code Security Quiz\nA 10-question security drill for everyone using Claude Code. Think you can ace it?',
 
     restartBtn: 'Try again ↻',
     footerHtml:
