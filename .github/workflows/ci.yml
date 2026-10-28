@@ -29,3 +29,6 @@ jobs:
       - run: pnpm run build
       # Smoke tests read dist/, so they must run after the build step.
       - run: pnpm test
+      # E2E stays in this job so it is covered by the required `verify` check.
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e

@@ -15,6 +15,7 @@ pnpm install     # 初回のみ
 pnpm dev         # http://localhost:4321/claude-code-security-drill/
 pnpm build       # dist/ に静的ファイル生成
 pnpm test        # dist/ に対するスモークテスト（node:test）。build 後に実行
+pnpm test:e2e    # Playwright で preview を起動しクイズを JA/EN で通す。build 後に実行（初回は pnpm exec playwright install chromium）
 pnpm preview     # build 後にローカルでプレビュー
 ```
 
