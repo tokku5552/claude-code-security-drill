@@ -8,12 +8,13 @@ Claude Code に関するセキュリティ・クイズ（全10問）を提供す
 
 ## よく使うコマンド
 
-パッケージマネージャは pnpm。`packageManager` フィールドで pin している。
+パッケージマネージャは pnpm。`packageManager` フィールドで pin している。Node は `.node-version` で pin（CI / deploy もこのファイルを読む）。
 
 ```sh
 pnpm install     # 初回のみ
 pnpm dev         # http://localhost:4321/claude-code-security-drill/
 pnpm build       # dist/ に静的ファイル生成
+pnpm test        # dist/ に対するスモークテスト（node:test）。build 後に実行
 pnpm preview     # build 後にローカルでプレビュー
 ```
 
