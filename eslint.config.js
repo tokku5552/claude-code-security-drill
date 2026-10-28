@@ -12,6 +12,8 @@ export default [
       '.venv/**',
       'public/**',
       'scripts/**',
+      'test-results/**',
+      'playwright-report/**',
     ],
   },
   js.configs.recommended,

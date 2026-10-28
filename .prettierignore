@@ -5,6 +5,8 @@ node_modules
 public/og
 public/share
 pnpm-lock.yaml
+test-results
+playwright-report
 
 # prettier-plugin-astro currently mis-parses the GA snippet inside
 # <script is:inline define:vars>. Skip the layout until the plugin handles it.
